@@ -54,4 +54,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import("./features/article/pages/article/article.component"),
   },
+  {
+    path: "user",
+    loadComponent: () => import("./core/auth/auth.component"),
+    canActivate: [
+      () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
+    ],
+  },
 ];
